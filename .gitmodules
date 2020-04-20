@@ -1,0 +1,3 @@
+[submodule "landingpage/themes/hugo-fresh"]
+	path = landingpage/themes/hugo-fresh
+	url = https://github.com/StefMa/hugo-fresh
