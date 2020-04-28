@@ -2,22 +2,24 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Box } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 
 const drawerWidth = 240;
 
@@ -50,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+    flexDirection: "column",
   },
   drawerOpen: {
     width: drawerWidth,
@@ -68,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
     },
+
   },
   toolbar: {
     display: 'flex',
@@ -83,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MiniDrawer() {
+export default function AppbarAndDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -118,10 +122,11 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Dashbook
+            Dashbook Project 1
           </Typography>
         </Toolbar>
       </AppBar>
+
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -144,7 +149,7 @@ export default function MiniDrawer() {
         <List>
           {['Dashboard'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon><DashboardIcon/></ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -153,11 +158,21 @@ export default function MiniDrawer() {
         <List>
           {['Notebook-1', 'Notebook-2', 'Notebook-3'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon><LibraryBooksIcon/></ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
+        <Box alignSelf="flex-end">
+          <Divider/>
+          <List >
+            <ListItem>
+              <ListItemIcon>
+                <LibraryAddIcon/>
+              </ListItemIcon>
+            </ListItem>
+          </List>
+        </Box>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
