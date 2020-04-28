@@ -17,13 +17,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { spacing } from '@material-ui/system';
 import { Grid, Paper } from '@material-ui/core';
-
-const drawerWidth = 240;
+import stores from '../../stores';
+const drawerWidth = 180;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    //display: 'flex',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -85,13 +86,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MiniDrawer() {
   const classes = useStyles();
+  let notebooks = [];
+
+  for(var i=1;i<=stores.getState();i++)
+  {
+    notebooks.push('Notebook-'+i);
+  }
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
+  
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -151,22 +158,16 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          {['Notebook-1', 'Notebook-2', 'Notebook-3'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+        {notebooks.map((value)=>{
+          return(
+            <ListItem button>
+              <ListItemIcon><MailIcon/></ListItemIcon>
+              <ListItemText primary={value} />
             </ListItem>
-          ))}
+          )
+        })}
         </List>
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-          <Grid item xs={12} sm={6}>
-              <Paper>
-                dashboard 1
-              </Paper>
-          </Grid>
-      </main>
     </div>
   );
 }
