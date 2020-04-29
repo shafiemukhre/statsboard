@@ -83,22 +83,25 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }));
-
-export default function MiniDrawer() {
-  const classes = useStyles();
-  let notebooks = [];
-
-  for(var i=1;i<=stores.getState();i++)
+let notebooks = ["Notebook-1"];
+export function demo()
+{
+  notebooks = [];
+  alert("hi");
+  for(var i=1;i<=stores.getState().count;i++)
   {
     notebooks.push('Notebook-'+i);
   }
+}
+export default function MiniDrawer() {
+  const classes = useStyles();
+  
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -106,6 +109,7 @@ export default function MiniDrawer() {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {

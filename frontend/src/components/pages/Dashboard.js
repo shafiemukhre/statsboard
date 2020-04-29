@@ -30,8 +30,8 @@ import TextField from '@material-ui/core/TextField';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import '../../css/Dashboard.css'
-import { CardHeader, Drawer } from '@material-ui/core';
-import MiniDrawer from '../layout/MiniDrawer';
+import { CardHeader, Drawer, responsiveFontSizes } from '@material-ui/core';
+import {MiniDrawer,demo} from '../layout/MiniDrawer';
 import {setCount} from '../../reducers/count/actions';
 import stores from '../../stores';
 
@@ -54,20 +54,16 @@ const useStyles = makeStyles(()=>({
 export default function MediaCard() {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
-
-  const handleChange1 = (event) => {
-    setAge(event.target.value);
-  };
   const [open, setOpen] = React.useState(false);
   const [open_db, setOpen_db] = React.useState(false);
   let shareLink = window.location.href;
-
   const [fields, setFields] = React.useState([{ value: null }]);
   function handleAdd() {
     const values = [...fields];
     values.push({ value: null });
     setFields(values);
-    stores.dispatch(setCount(values.length+1))
+    stores.dispatch(setCount(values.length));
+    demo();
   }
 
   var temp;
@@ -91,6 +87,10 @@ export default function MediaCard() {
     setOpen_db(true);
   };
   const handleClose_db = () => {
+    setOpen_db(false);
+  };
+
+  const handleConnect = () => {
     setOpen_db(false);
   };
   return (
@@ -155,7 +155,7 @@ export default function MediaCard() {
                           </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                          <Button onClick={handleClose_db} color="primary">Connect</Button>
+                          <Button onClick={handleConnect} color="primary">Connect</Button>
                           <Button onClick={handleClose_db} color="primary">Close</Button>
                         </DialogActions>
                       </Dialog>
@@ -169,7 +169,7 @@ export default function MediaCard() {
         <td width="5%" rowSpan="10" valign="top">
           <List>
             <ListItem>
-              <Button><AddCircleIcon style={{fontSize: '30'}} onClick={() => handleAdd() }/></Button>
+              <Button><AddCircleIcon style={{fontSize: '30'}} onClick={() => handleAdd()}/></Button>
             </ListItem>
             <ListItem>
               <Button onClick={handleClickOpen}><ShareIcon style={{fontSize: '30'}}/></Button>
