@@ -1,17 +1,12 @@
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid } from '@material-ui/core';
-import ReactDOM from "react-dom";
 import AddIcon from '@material-ui/icons/Add';
 import CreateIcon from '@material-ui/icons/Create';
 import TitleIcon from '@material-ui/icons/Title';
-import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
-
 export default function Notebook() {
-	
-	
+
   return (
     <div>
         <Grid item xs={12} sm={12}>
@@ -42,7 +37,3 @@ export default function Notebook() {
   );
 }
 
-
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Notebook />, rootElement);
