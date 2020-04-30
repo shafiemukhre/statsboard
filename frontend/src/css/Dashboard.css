@@ -1,0 +1,25 @@
+
+#card
+{
+    margin-top: 50px;
+    margin-left: 300px;
+    height: 360px;
+    width: 400px;
+}
+#img
+{
+    height: 165px;
+    max-width: 180px;
+    margin-left: 65px;
+}
+#card:hover > #description
+{
+    background-color: #5BC0EB;
+    color: whitesmoke;
+    cursor: pointer;
+}
+#card:hover
+{
+    cursor: pointer;
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2);
+}
