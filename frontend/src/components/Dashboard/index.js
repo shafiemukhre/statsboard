@@ -1,26 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import ShareIcon from '@material-ui/icons/Share';
-import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -29,9 +19,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import '../../css/Dashboard.css'
-import { CardHeader, Drawer, responsiveFontSizes } from '@material-ui/core';
-import {MiniDrawer,demo} from '../layout/MiniDrawer';
+import './style.module.css'
 import {setCount} from '../../reducers/count/actions';
 import stores from '../../stores';
 
@@ -51,6 +39,7 @@ const useStyles = makeStyles(()=>({
   selectEmpty: {
   },
 }));
+
 export default function MediaCard() {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
@@ -63,7 +52,7 @@ export default function MediaCard() {
     values.push({ value: null });
     setFields(values);
     stores.dispatch(setCount(values.length));
-    demo();
+    // demo();
   }
 
   var temp;
