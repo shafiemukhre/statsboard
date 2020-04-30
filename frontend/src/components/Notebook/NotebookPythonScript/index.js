@@ -59,8 +59,3 @@ export default function NotebookPythonScript() {
     </div>
   );
 }
-
-
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<NotebookPythonScript />, rootElement);

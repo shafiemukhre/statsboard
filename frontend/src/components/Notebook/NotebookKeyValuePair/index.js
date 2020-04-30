@@ -2,17 +2,12 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import React, {Component, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import ReactDOM from "react-dom";
+
 import TextField from '@material-ui/core/TextField';
-import AddIcon from '@material-ui/icons/Add';
-import CreateIcon from '@material-ui/icons/Create';
-import TitleIcon from '@material-ui/icons/Title';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-
-
-
 
 export default class NotebookKeyValuePair extends Component {
 
@@ -205,3 +200,4 @@ onKeyChange(e) {
 
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<NotebookKeyValuePair />, rootElement);
+
