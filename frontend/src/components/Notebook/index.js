@@ -98,7 +98,6 @@ export default function NotebookKeyValuePair() {
 				</div>	
 			</div> 
         </Grid>
-		<iframe src="https://www.shafiemukhre.com" width="1200px" height="1000px"> </iframe>
     </div>
   );
 }
