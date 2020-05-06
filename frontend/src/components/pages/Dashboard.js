@@ -34,6 +34,7 @@ import { CardHeader, Drawer, responsiveFontSizes } from '@material-ui/core';
 import {MiniDrawer,demo} from '../layout/MiniDrawer';
 import {setCount} from '../../reducers/count/actions';
 import stores from '../../stores';
+import axios from 'axios'
 
 const useStyles = makeStyles(()=>({
   root: {
@@ -56,6 +57,7 @@ export default function MediaCard() {
   const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const [open_db, setOpen_db] = React.useState(false);
+  const [data,setData] = React.useState([])
   let shareLink = window.location.href;
   const [fields, setFields] = React.useState([{ value: null }]);
   function handleAdd() {
@@ -65,7 +67,13 @@ export default function MediaCard() {
     stores.dispatch(setCount(values.length));
     demo();
   }
-
+ 
+  React.useEffect(() =>{
+    fetch('http://localhost:5000/notebooklist',)
+    .then(response => response.json())
+    .then(data => setData(data));
+  },[]);
+  
   var temp;
   function handleChange(i, event) {
     const values = [...fields];
@@ -93,6 +101,9 @@ export default function MediaCard() {
   const handleConnect = () => {
     setOpen_db(false);
   };
+
+
+  
   return (
     <div>
       <table width="100%"  className = {classes.table}>
@@ -117,18 +128,18 @@ export default function MediaCard() {
                         <DialogContent>
                           <DialogContentText>
                               <Grid container spacing={2} alignItems="flex-end">
-                                  <Grid item>Database:</Grid>
+                                  <Grid item>Notebook:</Grid>
                                   <Grid item>
+                                    <FormControl className={classes.formControl}>
                                     <Select style={{fontSize:'10px'}} displayEmpty className={classes.selectEmpty} inputProps={{ 'aria-label': 'Without label' }}>
-                                      <MenuItem disabled style={{fontSize:'10px'}}>select database</MenuItem>
-                                      <MenuItem style={{fontSize:'10px'}}>dummy database</MenuItem>
+                                      <MenuItem disabled style={{fontSize:'10px'}}>select notebook</MenuItem>
+                                      {data.map((item)=>{
+                                        return(
+                                          <MenuItem style={{fontSize:'10px'}} value={item.nbname}>{item.nbname}</MenuItem>
+                                        )
+                                      })}
                                     </Select>
-                                  </Grid>
-                                  <Grid item>
-                                    <Select style={{fontSize:'10px'}} displayEmpty className={classes.selectEmpty} inputProps={{ 'aria-label': 'Without label' }}>
-                                      <MenuItem disabled style={{fontSize:'10px'}}>select table</MenuItem>
-                                      <MenuItem style={{fontSize:'10px'}}>dummy table</MenuItem>
-                                    </Select>
+                                    </FormControl>
                                   </Grid>
                                   </Grid>
                                   <Grid container spacing={2} alignItems="flex-end">
