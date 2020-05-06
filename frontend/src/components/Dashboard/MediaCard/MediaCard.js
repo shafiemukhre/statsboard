@@ -7,18 +7,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Divider from '@material-ui/core/Divider';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
-import ShareIcon from '@material-ui/icons/Share';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
 import styles from './style.module.css'
 import {setCount} from '../../../reducers/count/actions';
 import stores from '../../../stores';
@@ -45,6 +38,7 @@ export default function MediaCard() {
   const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const [open_db, setOpen_db] = React.useState(false);
+  const [data,setData] = React.useState([])
   let shareLink = window.location.href;
   const [fields, setFields] = React.useState([{ value: null }]);
   function handleAdd() {
@@ -54,6 +48,12 @@ export default function MediaCard() {
     stores.dispatch(setCount(values.length));
     // demo();
   }
+
+  React.useEffect(() =>{
+    fetch('http://localhost:5000/notebooklist',)
+    .then(response => response.json())
+    .then(data => setData(data));
+  },[]);
 
   var temp;
   function handleChange(i, event) {
@@ -145,3 +145,9 @@ export default function MediaCard() {
     </div>
   );
 }
+  
+ 
+
+  
+
+  
