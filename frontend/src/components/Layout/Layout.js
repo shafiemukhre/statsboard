@@ -178,7 +178,7 @@ export default function Layout(props) {
         </List>
         <Divider />
         <List>
-              {['Notebook-1', 'Notebook-2', 'Notebook-3' ].map((text, index) => (
+              {['Notebook-1','Notebook-2','Notebook-3'].map((text, index) => (
                 <ListItemLink key={index} href={`/${text}`} >
                   <ListItemIcon><LibraryBooksIcon/></ListItemIcon>
                   <ListItemText primary={text} />
