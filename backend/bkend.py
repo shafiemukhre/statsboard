@@ -24,10 +24,10 @@ c = conn.cursor()
 
 @app.route('/',methods=['GET'])
 def createtable():
-	c.execute("CREATE TABLE IF NOT EXISTS keyvaluetable(id INTEGER PRIMARY KEY AUTOINCREMENT, key varchar(255), value varchar(255))")
-	c.execute("CREATE TABLE IF NOT EXISTS inputtable(id INTEGER PRIMARY KEY AUTOINCREMENT, xlabel varchar(255), xvalue varchar(255))")
-	c.execute("CREATE TABLE IF NOT EXISTS outputtable(id INTEGER PRIMARY KEY AUTOINCREMENT, ylabel varchar(255), yvalue varchar(255))")
-	c.execute("CREATE TABLE IF NOT EXISTS notebooktable(id INTEGER PRIMARY KEY AUTOINCREMENT, mltype varchar(255), graphtype varchar(255))")
+	c.execute("CREATE TABLE IF NOT EXISTS keyvaluetable(id INTEGER PRIMARY KEY AUTOINCREMENT, key varchar(255), value varchar(255), nb_id INTEGER)")
+	c.execute("CREATE TABLE IF NOT EXISTS inputoutputtable(id INTEGER PRIMARY KEY AUTOINCREMENT, xlabel varchar(255), xvalue varchar(255), ylabel varchar(255), yvalue varchar(255), nb_id INTEGER)")
+	# c.execute("CREATE TABLE IF NOT EXISTS outputtable(id INTEGER PRIMARY KEY AUTOINCREMENT, ylabel varchar(255), yvalue varchar(255),  nb_id INTEGER)")
+	c.execute("CREATE TABLE IF NOT EXISTS notebooktable(id INTEGER PRIMARY KEY AUTOINCREMENT, notebookname varchar(255), graphtype varchar(255))")
 	return "table created successfully."
 
 @app.route('/Notebook',methods=['GET','POST'])
@@ -45,9 +45,48 @@ def notebookrequest():
 			print(msg)
 		except:
 			conn.rollback()
-			msg = "Error in inserting the record"
+			msg = "Error in inserting the record."
 			print(msg)
-	return {"key":"1"}
+		return {"key":"1"}
+	elif request.method == 'GET':
+		conn.row_factory = sqlite3.Row
+		c.execute("select id, key, value, nb_id from keyvaluetable")
+		data = c.fetchall()
+		# print (tab)
+		# jtab= json.dumps(tab)
+		# print (jtab)
+		# return jtab
+		json_dict = {}
+		result = []
+		keys = ['id','key','value','nb_id']
+		print(data[0][0])
+		for i in range(len(data)):
+			for j in range(len(data[i])):
+				json_dict[keys[j]] = data[i][j]
+			result.append(json_dict)
+			json_dict = {}
+		return json.dumps(result)
+
+
+@app.route('/dashboard',methods=['GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def dashboard():
+	c.execute('select DISTINCT nt.id,notebookname,graphtype,xlabel,xvalue,ylabel,yvalue from ' +
+			  'notebooktable nt INNER JOIN inputoutputtable it ON nt.id = it.nb_id')
+	data = c.fetchall()
+	json_dict = {}
+	result = []
+	keys = ['id','nbname','graphtype','xlabel','xvalue','ylabel','yvalue']
+	print(data[0][0])
+	for i in range(len(data)):
+		for j in range(len(data[i])):
+			json_dict[keys[j]] = data[i][j]
+		result.append(json_dict)
+		json_dict = {}
+			
+	return json.dumps(result)
+
+
 	
 
 if __name__ == "__main__":
