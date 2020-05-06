@@ -1,23 +1,35 @@
 import React from 'react';
-import MiniDrawer from "./components/layout/MiniDrawer";
-import { BrowserRouter as Router, Route, Redirect  } from "react-router-dom";
-import SignIn from "./components/pages/SignIn";
-import SignUp from "./components/pages/SignUp";
-import Dashboard from "./components/pages/Dashboard";
+import { BrowserRouter as Router, Route, Redirect, Switch} from "react-router-dom";
+
+import SignIn from "../SignIn";
+import SignUp from "../SignUp";
+import Dashboard from "../../components/Dashboard";
+import Notebook from "../../components/Notebook/Notebook"
+import Layout from '../../components/Layout';
 
 function App() {
   return (
-    <Router>
-      <div marginTop="100"><Dashboard/></div>
-      
     <div className="App">
-      <Route path="/" exact component={MiniDrawer} />
-      <Route path="/dashboard" exact component={Dashboard} />
-      <Route path="/signin" exact component={SignIn} />
-      <Route path="/signup" exact component={SignUp} />
+          <Router>
+            <Switch>
+              <Redirect exact from="/" to="/dashboard"/>
+              <Route path="/signin" exact component={SignIn} />
+              <Route path="/signup" exact component={SignUp} />
 
+              <Route path="/dashboard">
+                <Layout>
+                  <Dashboard/> 
+                </Layout>
+              </Route>
+
+              <Route path="/notebook">
+                <Layout>
+                  <Notebook/> 
+                </Layout>
+              </Route>
+            </Switch>
+          </Router>
     </div>
-    </Router>
   );
 }
 

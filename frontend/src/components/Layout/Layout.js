@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -12,7 +11,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Grid, Paper, Box, Tabs } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
@@ -21,8 +20,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
-
-import { Link } from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -88,49 +85,22 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
       padding: theme.spacing(3),
     },
+    wrapper: {
+      flexDirection: 'row'
+    }
 }));
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
+function ListItemLink(props) {
+  return <ListItem button component="a" {...props} />;
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
-
-export default function AppbarAndDrawer() {
-  //
+export default function Layout(props) {
+  const {children} = props;
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  //
   const theme = useTheme();
   const classes = useStyles(theme);
   const [open, setOpen] = React.useState(false);
@@ -190,34 +160,31 @@ export default function AppbarAndDrawer() {
         </div>
         <Divider />
         <List>
-          <Link to='/dashboard'>
             {['Dashboard'].map((text, index) => (
-              <ListItem button key={text}>
+              <ListItemLink href="/dashboard" key="index">
                 <ListItemIcon><DashboardIcon/></ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
+                <ListItemText primary={text} /> 
+              </ListItemLink>
             ))}
-          </Link>
+        </List>
+        {/* TEMPORARY */}
+        <List>
+            {['Temp Notebook'].map((text, index) => (
+              <ListItemLink href="/notebook" key="index">
+                <ListItemIcon><LibraryBooksIcon/></ListItemIcon>
+                <ListItemText primary={text} /> 
+              </ListItemLink>
+            ))}
         </List>
         <Divider />
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          className={classes.tabs}
-        >
-            <List>
-              {['Notebook-1', 'Notebook-2', 'Notebook-3' ].map((text, index) => (
-                <ListItem button key={text} {...a11yProps(index)}>
+        <List>
+              {['Notebook-1','Notebook-2','Notebook-3'].map((text, index) => (
+                <ListItemLink key={index} href={`/${text}`} >
                   <ListItemIcon><LibraryBooksIcon/></ListItemIcon>
                   <ListItemText primary={text} />
-                </ListItem>
+                </ListItemLink>
               ))}
             </List>
-        </Tabs>
-
         <Box>
           <Divider/>
           <List >
@@ -230,23 +197,9 @@ export default function AppbarAndDrawer() {
           </List>
         </Box>
       </Drawer>
-      {/* <main className={classes.content}>
-        <div className={classes.toolbar} />
-          <Grid item xs={12} sm={6}>
-              <Paper>
-                dashboard 1
-              </Paper>
-          </Grid>
-      </main> */}
-      <TabPanel value={value} index={0}>
-        Notebook 1
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Notebook 2
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Notebook 3
-      </TabPanel>
+      <main className={classes.content}>
+        {children}
+      </main>
     </div>
   );
 }
