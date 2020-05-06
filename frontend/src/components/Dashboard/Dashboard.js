@@ -9,6 +9,71 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+// import Grid from '@material-ui/core/Grid';
+// import TextField from '@material-ui/core/TextField';
+// import FileCopyIcon from '@material-ui/icons/FileCopy';
+// import {CopyToClipboard} from 'react-copy-to-clipboard';
+// import '../../css/Dashboard.css'
+// import { CardHeader, Drawer, responsiveFontSizes } from '@material-ui/core';
+// import {MiniDrawer,demo} from '../layout/MiniDrawer';
+// import {setCount} from '../../reducers/count/actions';
+// import stores from '../../stores';
+// import axios from 'axios'
+
+// const useStyles = makeStyles(()=>({
+//   root: {
+//     width: 800,
+//     height: 400,
+//     fontSize: 10,
+//     marginLeft:300,
+//   },
+//   table: {
+//    marginTop:100
+//   },
+//   formControl: {
+//     minWidth: 100,
+//   },
+//   selectEmpty: {
+//   },
+// }));
+// export default function MediaCard() {
+//   const classes = useStyles();
+//   const [age, setAge] = React.useState('');
+//   const [open, setOpen] = React.useState(false);
+//   const [open_db, setOpen_db] = React.useState(false);
+//   const [data,setData] = React.useState([])
+//   let shareLink = window.location.href;
+//   const [fields, setFields] = React.useState([{ value: null }]);
+//   function handleAdd() {
+//     const values = [...fields];
+//     values.push({ value: null });
+//     setFields(values);
+//     stores.dispatch(setCount(values.length));
+//     demo();
+//   }
+ 
+//   React.useEffect(() =>{
+//     fetch('http://localhost:5000/notebooklist',)
+//     .then(response => response.json())
+//     .then(data => setData(data));
+//   },[]);
+  
+//   var temp;
+//   function handleChange(i, event) {
+//     const values = [...fields];
+//     values[i].value = event.target.value; 
+//     temp = event.target.value;
+//     var idx = "X-"+(i+1);
+//     document.getElementById(idx).innerHTML = temp;
+//     setFields(values);
+//   }
+  
+//   const handleClickOpen = () => {
+//     setOpen(true);
+//   };
+//   const handleClose = () => {
+//     setOpen(false);
+//   };
 
 import MediaCard from './MediaCard/MediaCard';
 
