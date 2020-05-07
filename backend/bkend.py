@@ -53,7 +53,8 @@ def notebookrequest(user_id,nb_id):
 		return {"key":"1"}
 	elif request.method == 'GET':
 		conn.row_factory = sqlite3.Row
-		c.execute("select id, type, key, value, user_id ,nb_id from keyvaluetable where user_id = (?) ", user_id)
+		query = 'select id, type, key, value, user_id ,nb_id from keyvaluetable where user_id =  "' + user_id + '"'
+		c.execute(query)
 		data = c.fetchall()
 		# print (tab)
 		# jtab= json.dumps(tab)
@@ -74,13 +75,12 @@ def notebookrequest(user_id,nb_id):
 @app.route('/<user_id>/dashboard',methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def dashboard(user_id):
-	c.execute('select DISTINCT it.id,notebookname,graphtype,it.ylabel,it.user_id,it.nb_id from ' +
-			  'notebooktable nt INNER JOIN inputoutputtable it ON nt.id = it.nb_id where it.user_id = (?)', user_id)
+	query = 'select DISTINCT it.id,notebookname,graphtype,it.ylabel,it.user_id,it.nb_id from notebooktable nt INNER JOIN inputoutputtable it ON nt.nb_id = it.nb_id where it.user_id = "'+ user_id + '"'
+	c.execute(query)
 	data = c.fetchall()
 	json_dict = {}
 	result = []
 	keys = ['id','nbname','graphtype','ylabel','user_id','nb_id']
-	print(data[0][0])
 	for i in range(len(data)):
 		for j in range(len(data[i])):
 			json_dict[keys[j]] = data[i][j]
@@ -92,8 +92,8 @@ def dashboard(user_id):
 @app.route('/<user_id>/notebooklist',methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def notebooklist(user_id):
-	c.execute('select DISTINCT notebookname from ' +
-			  'notebooktable nt INNER JOIN inputoutputtable it ON nt.id = it.nb_id where it.user_id = (?)', user_id)
+	query = 'select DISTINCT notebookname from notebooktable nt INNER JOIN inputoutputtable it ON nt.nb_id = it.nb_id where it.user_id = "'+ user_id + '"'
+	c.execute(query)
 	data = c.fetchall()
 	json_dict = {}
 	result = []
