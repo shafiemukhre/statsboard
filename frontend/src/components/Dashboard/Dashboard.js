@@ -31,7 +31,6 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import '../../css/Dashboard.css'
 import { CardHeader, Drawer, responsiveFontSizes } from '@material-ui/core';
-import {MiniDrawer,demo} from '../layout/MiniDrawer';
 import {setCount} from '../../reducers/count/actions';
 import stores from '../../stores';
 import axios from 'axios'
@@ -65,11 +64,11 @@ export default function MediaCard() {
     values.push({ value: null });
     setFields(values);
     stores.dispatch(setCount(values.length));
-    demo();
+   
   }
  
   React.useEffect(() =>{
-    fetch('http://localhost:5000/notebooklist',)
+    fetch('http://3.17.63.183:5000/notebooklist',)
     .then(response => response.json())
     .then(data => setData(data));
   },[]);
