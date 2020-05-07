@@ -2,7 +2,7 @@
 .cardStyles
 {
     width: 549px;
-    height: 38vh;
+    /* height: 38vh; */
 }
 
 @media only screen and (max-width: 1024px) {

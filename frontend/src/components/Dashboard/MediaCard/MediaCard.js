@@ -15,11 +15,12 @@ import Grid from '@material-ui/core/Grid';
 import styles from './style.module.css'
 import {setCount} from '../../../reducers/count/actions';
 import stores from '../../../stores';
+import Chartjs from '../Chart/Chartjs';
 
 const useStyles = makeStyles(()=>({
   root: {
-    width: '',
-    height: '38vh',
+    // width: '',
+    // height: '38vh',
     // fontSize: 10,
     // marginLeft:300,
   },
@@ -49,11 +50,11 @@ export default function MediaCard() {
     // demo();
   }
 
-  React.useEffect(() =>{
-    fetch('http://localhost:5000/notebooklist',)
-    .then(response => response.json())
-    .then(data => setData(data));
-  },[]);
+  // React.useEffect(() =>{
+  //   fetch('http://localhost:5000/notebooklist',)
+  //   .then(response => response.json())
+  //   .then(data => setData(data));
+  // },[]);
 
   var temp;
   function handleChange(i, event) {
@@ -140,8 +141,8 @@ export default function MediaCard() {
             </Dialog>
         </table>
           <Divider/>
+          <Chartjs/>
         </Card>
-        {/* TODO: PUT CONTENT HERE */}
     </div>
   );
 }

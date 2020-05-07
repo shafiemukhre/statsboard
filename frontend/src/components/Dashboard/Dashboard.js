@@ -23,7 +23,6 @@ export default function Dashboard(){
         setOpen(false);
       };
 
-
     return (
         <div style={{marginTop: 40}}>
             <Button onClick={handleClickOpen}><ShareIcon style={{fontSize: '30'}}/></Button>
