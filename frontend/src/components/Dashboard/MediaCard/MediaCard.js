@@ -34,7 +34,7 @@ const useStyles = makeStyles(()=>({
   },
 }));
 
-export default function MediaCard() {
+export default function MediaCard(props) {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -89,7 +89,7 @@ export default function MediaCard() {
         <table width="100%">
           <tr>
           <td align="left" valign="top" width="35%" style={{color:'gray'}}>
-            Notebook
+            {props.nbname}
           </td>
           <td align="right" valign="top">
             <Button style={{fontSize:10}} onClick={()=>handleClickOpen_db()} color="primary">Connect to database</Button>

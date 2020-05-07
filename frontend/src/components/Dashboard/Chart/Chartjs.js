@@ -9,10 +9,18 @@ export default function Chartjs(){
             labels: ['monday', 'tuesday','wednesday','thursday','friday'],
             datasets: [
                 {
-                    label: 'level of thickness',
+                    label: 'thickness',
                     data: [32, 45, 12, 76, 69],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.6)'
+                    ],
+                    borderWidth: 4
+                },
+                {
+                    label: 'thinness',
+                    data: [45, 50, 32, 12, 33],
+                    backgroundColor: [
+                        'rgba(75, 75, 75, 0.6)'
                     ],
                     borderWidth: 4
                 }

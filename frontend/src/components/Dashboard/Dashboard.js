@@ -11,6 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
 import MediaCard from './MediaCard/MediaCard';
+import useDashboardData from './hooks';
 
 export default function Dashboard(){
     const [open, setOpen] = React.useState(false);
@@ -22,6 +23,8 @@ export default function Dashboard(){
       const handleClose = () => {
         setOpen(false);
       };
+
+    const datas = useDashboardData()
 
     return (
         <div style={{marginTop: 40}}>
@@ -52,9 +55,9 @@ export default function Dashboard(){
                 <Grid item xs={false} md={1} ></Grid>
                 <Grid item xs ={12} md={10}>
                     <Box display="flex" flexWrap="wrap">
-                        <MediaCard/>
-                        <MediaCard/>
-                        <MediaCard/>
+                        {datas.map((data, i) => (
+                            <MediaCard nbname={data.nbname} key={i}/>
+                        ))}
                     </Box>
                 </Grid>
                 <Grid item xs={false} md={1}></Grid>

@@ -1,18 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
+
+import Box from '@material-ui/core/Box';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Box } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,75 +18,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MenuIcon from '@material-ui/icons/Menu';
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-    },
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-    appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    menuButton: {
-      marginRight: 36,
-    },
-    hide: {
-      display: 'none',
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-      whiteSpace: 'nowrap',
-      flexDirection: "column",
-    },
-    drawerOpen: {
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    drawerClose: {
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      overflowX: 'hidden',
-      width: theme.spacing(7) + 1,
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9) + 1,
-      },
-  
-    },
-    toolbar: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-    },
-    wrapper: {
-      flexDirection: 'row'
-    }
-}));
+import useStyles from './style'
+import useData from './hooks'
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
@@ -101,8 +36,7 @@ export default function Layout(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const theme = useTheme();
-  const classes = useStyles(theme);
+
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -112,6 +46,10 @@ export default function Layout(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const theme = useTheme();
+  const classes = useStyles(theme);
+  const notebooks = useData()
 
   return (
     <div className={classes.root}>
@@ -167,21 +105,12 @@ export default function Layout(props) {
               </ListItemLink>
             ))}
         </List>
-        {/* TEMPORARY */}
-        <List>
-            {['Temp Notebook'].map((text, index) => (
-              <ListItemLink href="/notebook" key="index">
-                <ListItemIcon><LibraryBooksIcon/></ListItemIcon>
-                <ListItemText primary={text} /> 
-              </ListItemLink>
-            ))}
-        </List>
         <Divider />
         <List>
-              {['Notebook-1','Notebook-2','Notebook-3'].map((text, index) => (
-                <ListItemLink key={index} href={`/${text}`} >
+              {notebooks.map((notebook, index) => (
+                <ListItemLink key={index} href={`/${notebook.nbname}`} >
                   <ListItemIcon><LibraryBooksIcon/></ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={notebook.nbname} />
                 </ListItemLink>
               ))}
             </List>
