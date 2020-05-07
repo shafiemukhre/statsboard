@@ -24,11 +24,11 @@ c = conn.cursor()
 
 @app.route('/',methods=['GET'])
 def createtable():
-	c.execute("CREATE TABLE IF NOT EXISTS keyvaluetable(id INTEGER PRIMARY KEY AUTOINCREMENT, type varchar(64) NOT NULL,key varchar(255) NOT NULL, value varchar(255) NOT NULL, user_id varchar(64) NOT NULL, nb_id INTEGER)")
-	c.execute("CREATE TABLE IF NOT EXISTS urltable(id INTEGER PRIMARY KEY AUTOINCREMENT, urlstring varchar(64) NOT NULL, user_id varchar(64) NOT NULL, nb_id INTEGER)")
-	c.execute("CREATE TABLE IF NOT EXISTS inputoutputtable(id INTEGER PRIMARY KEY AUTOINCREMENT, xlabel varchar(255) NOT NULL, xvalue varchar(255) NOT NULL, ylabel varchar(255) NOT NULL, yvalue varchar(255) NOT NULL, user_id varchar(64) NOT NULL, nb_id INTEGER)")
-	c.execute("CREATE TABLE IF NOT EXISTS notebooktable(id INTEGER PRIMARY KEY AUTOINCREMENT, nb_id INTEGER, notebookname varchar(255), graphtype varchar(255), ylabel varchar(255), user_id varchar(64) NOT NULL)")
-	c.execute("CREATE TABLE IF NOT EXISTS userprofile(id INTEGER PRIMARY KEY AUTOINCREMENT, email varchar(64) NOT NULL, user_id varchar(64) NOT NULL, password varchar(64) NOT NULL, language varchar(16), picture LONGBLOP, access varchar(16))")
+	c.execute("CREATE TABLE IF NOT EXISTS keyvaluetable(id INTEGER PRIMARY KEY AUTOINCREMENT, type varchar(64) NOT NULL,key varchar(255) NOT NULL, value varchar(255) NOT NULL, user_id varchar(64) NOT NULL, nb_id varchar(255))")
+	c.execute("CREATE TABLE IF NOT EXISTS urltable(id INTEGER PRIMARY KEY AUTOINCREMENT, urlstring varchar(64) NOT NULL, user_id varchar(64) NOT NULL, nb_id varchar(255))")
+	c.execute("CREATE TABLE IF NOT EXISTS inputoutputtable(id INTEGER PRIMARY KEY AUTOINCREMENT, xlabel varchar(255) NOT NULL, xvalue varchar(255) NOT NULL, ylabel varchar(255) NOT NULL, yvalue varchar(255) NOT NULL, user_id varchar(64) NOT NULL, nb_id varchar(255))")
+	c.execute("CREATE TABLE IF NOT EXISTS notebooktable(id INTEGER PRIMARY KEY AUTOINCREMENT, nb_id varchar(255), notebookname varchar(255), graphtype varchar(255), ylabel varchar(255), user_id varchar(64) NOT NULL)")
+	c.execute("CREATE TABLE IF NOT EXISTS userprofile(id INTEGER PRIMARY KEY AUTOINCREMENT, email varchar(64) NOT NULL, user_id varchar(64) NOT NULL, password varchar(64) NOT NULL, language varchar(16), access varchar(16))")
 	return "table created successfully."
 
 
@@ -109,7 +109,7 @@ def notebooklist(user_id):
 @app.route('/<user_id>/chartdata/<nb_id>', methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def chartdata(user_id, nb_id):
-	query = 'select DISTINCT nb_id, xlabel, xvalue, yvalue, user_id, nb_id from inputoutputtable where user_id = ' + user_id + ' AND nb_id =' + nb_id
+	query = 'select DISTINCT xlabel, xvalue, yvalue, user_id, nb_id from inputoutputtable where user_id = "' + user_id + '" AND nb_id = "' + nb_id + '"'
 	print(query)
 	c.execute(query)
 	data = c.fetchall()
@@ -118,9 +118,9 @@ def chartdata(user_id, nb_id):
 	value = []
 	key = ['xlabel','xvalue', 'yvalue', 'user_id', 'nb_id']
 	i = 0
-	j = 1
-	json_dict['id'] = nb_id
-	while j < len(data[0]) - 1:
+	j = 0
+	json_dict['id'] = 0
+	while j < len(data[0]):
 		while i < 2:
 			value.append(data[i][j])
 			i += 1
@@ -131,6 +131,40 @@ def chartdata(user_id, nb_id):
 	result.append(json_dict)
 	return json.dumps(result)
 	
+
+
+@app.route('/<user_id>/<nb_id>/urltable',methods=['POST','GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def urltablepost(user_id,nb_id):
+	if request.method == 'POST':
+		req = request.json
+		print (req)
+		try:
+			urlstring = req['urlstring']
+			c.execute("INSERT INTO urltable(urlstring,user_id,nb_id) VALUES (?,?,?)",(urlstring, user_id, nb_id))
+			conn.commit()
+			msg = "Record inserted successfully"
+			print(msg)
+		except:
+			conn.rollback()
+			msg = "Error in inserting the record."
+			print(msg)
+		return {"key":"1"}
+	elif request.method == 'GET':
+		query = 'select urlstring from urltable where user_id = "' + user_id + '"'
+		c.execute(query)
+		data = c.fetchall()
+		json_dict = {}
+		result = []
+		json_dict['urlstring'] = data[0][0]
+		result.append(json_dict)
+			
+				
+		return json.dumps(result)
+
+		
+
+
 
 if __name__ == "__main__":
     app.run()
