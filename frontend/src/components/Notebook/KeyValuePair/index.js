@@ -83,7 +83,6 @@ onKeyChange(e) {
   
   onSubmit(e) {
     const data={
-
         key:this.state.key,
         value:this.state.value
     }

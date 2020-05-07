@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom'
 
 import Box from '@material-ui/core/Box';
 import Drawer from '@material-ui/core/Drawer';
@@ -14,6 +15,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import Avatar from '@material-ui/core/Avatar';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
@@ -21,9 +25,11 @@ import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import useStyles from './style'
 import useData from './hooks'
+// import temmporaryimage from './temporary.jpg'
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
@@ -32,6 +38,8 @@ function ListItemLink(props) {
 export default function Layout(props) {
   const {children} = props;
   const [value, setValue] = React.useState(0);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openProfile = Boolean(anchorEl);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -45,6 +53,18 @@ export default function Layout(props) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+
+  const history = useHistory()
+  const handleClose = () => {
+    setAnchorEl(null);
+    history.push("/account")
+
   };
 
   const theme = useTheme();
@@ -75,6 +95,35 @@ export default function Layout(props) {
           <Typography variant="h6" noWrap>
             Dashbook Project 1
           </Typography>
+          <div>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <Avatar alt="Shafie Mukhre" src='/images/temporary.jpg'/>
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={openProfile}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
 

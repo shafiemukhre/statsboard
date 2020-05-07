@@ -6,6 +6,7 @@ import SignUp from "../SignUp";
 import Dashboard from "../../components/Dashboard";
 import Notebook from "../../components/Notebook/Notebook"
 import Layout from '../../components/Layout';
+import Account from '../../components/Account';
 
 function App() {
   return (
@@ -27,6 +28,13 @@ function App() {
                   <Notebook/> 
                 </Layout>
               </Route>
+
+              <Route path="/account">
+                <Layout>
+                  <Account/>
+                </Layout>
+              </Route>
+
             </Switch>
           </Router>
     </div>

@@ -1,13 +1,12 @@
 /* 1280px */
 .cardStyles
 {
-    width: 549px;
-    /* height: 38vh; */
+    width: 533px;
 }
 
 @media only screen and (max-width: 1024px) {
     .cardStyles {
-      width: 50%;
+      width: 360px;
     }
 }
 
@@ -19,7 +18,7 @@
 
 @media only screen and (max-width: 768px) {
     .cardStyles {
-      width: 50%;
+      width: 307px;
     }
 }
 

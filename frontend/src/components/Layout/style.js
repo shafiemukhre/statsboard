@@ -5,6 +5,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
+      flexGrow: 1,
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -66,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
     },
     wrapper: {
       flexDirection: 'row'
+    },
+    profileposition: {
+      // alignSelf: 'flex-end'
     }
 }));
 

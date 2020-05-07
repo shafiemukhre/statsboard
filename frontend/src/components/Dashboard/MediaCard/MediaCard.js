@@ -15,7 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import styles from './style.module.css'
 import {setCount} from '../../../reducers/count/actions';
 import stores from '../../../stores';
-import Chartjs from '../Chart/Chartjs';
+import Chartjs from '../LineChart/LineChart';
 
 const useStyles = makeStyles(()=>({
   root: {

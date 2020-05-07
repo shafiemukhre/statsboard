@@ -12,6 +12,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 
 import MediaCard from './MediaCard/MediaCard';
 import useDashboardData from './hooks';
+import Tabular from './Tabular/Tabular';
 
 export default function Dashboard(){
     const [open, setOpen] = React.useState(false);
@@ -54,9 +55,12 @@ export default function Dashboard(){
             <Grid container>
                 <Grid item xs={false} md={1} ></Grid>
                 <Grid item xs ={12} md={10}>
-                    <Box display="flex" flexWrap="wrap">
+                    <Box display="flex" flexWrap="wrap" justifyContent="center">
                         {datas.map((data, i) => (
-                            <MediaCard nbname={data.nbname} key={i}/>
+                            <Box key={i} p={1}>
+                                <MediaCard nbname={data.nbname} key={i}/>
+                                {/* <Tabular key={i}/> */}
+                            </Box>
                         ))}
                     </Box>
                 </Grid>
