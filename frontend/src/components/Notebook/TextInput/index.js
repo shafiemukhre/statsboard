@@ -59,7 +59,3 @@ export default function NotebookTextInput() {
   );
 }
 
-
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<NotebookTextInput />, rootElement);

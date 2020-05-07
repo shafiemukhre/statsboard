@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
    
 }));
 
-
 export default function NotebookPythonScript() {
   const classes = useStyles();
 
@@ -59,8 +58,3 @@ export default function NotebookPythonScript() {
     </div>
   );
 }
-
-
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<NotebookPythonScript />, rootElement);
