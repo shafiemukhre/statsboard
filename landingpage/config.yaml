@@ -1,12 +1,16 @@
 baseURL: https://dashbook.ml/
 languageCode: en-us
-title: Dashbook
+title: Dashbook ML Predictive Analysis
 theme: hugo-fresh
 googleAnalytics: # Put in your tracking code without quotes like this: UA-XXXXXX...
 # Disables warnings
 disableKinds:
 - taxonomy
 - taxonomyTerm
+- dashboard
+- Notebook
+- dashbook
+
 markup:
   goldmark:
     renderer:
