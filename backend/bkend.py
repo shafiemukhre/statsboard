@@ -75,7 +75,8 @@ def notebookrequest(user_id,nb_id):
 @app.route('/<user_id>/dashboard',methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def dashboard(user_id):
-	query = 'select DISTINCT it.id,notebookname,graphtype,it.ylabel,it.user_id,it.nb_id from notebooktable nt INNER JOIN inputoutputtable it ON nt.nb_id = it.nb_id where it.user_id = "'+ user_id + '"'
+	#query = 'select DISTINCT it.id,notebookname,graphtype,it.ylabel,it.user_id,it.nb_id from notebooktable nt INNER JOIN inputoutputtable it ON nt.nb_id = it.nb_id where it.user_id = "'+ user_id + '"'
+	query = 'select DISTINCT nt.id,notebookname,graphtype,nt.ylabel,nt.user_id,nt.nb_id from notebooktable nt INNER JOIN inputoutputtable it ON nt.nb_id = it.nb_id where it.user_id = "'+ user_id + '"'
 	c.execute(query)
 	data = c.fetchall()
 	json_dict = {}
