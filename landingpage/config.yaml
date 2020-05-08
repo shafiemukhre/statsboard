@@ -1,6 +1,6 @@
 baseURL: https://dashbook.ml/
 languageCode: en-us
-title: Dashbook ML Predictive Analysis
+title: Dashbook.ml Predictive Analysis | Dashboard ML for Centralized Predictive Analytics
 theme: hugo-fresh
 googleAnalytics: # Put in your tracking code without quotes like this: UA-XXXXXX...
 # Disables warnings
@@ -20,7 +20,7 @@ params:
   # Open graph allows easy social sharing. If you don't want it you can set it to false or just delete the variable
   openGraph: true
   # Used as meta data; describe your site to make Google Bots happy 
-  description: 
+  description: Dashbook is SaaS platform to centralized Prediction Analysis in one dashboard
   navbarlogo:
   # Logo (from static/images/logos/___)
     image: logos/dashbooklogov1.png
