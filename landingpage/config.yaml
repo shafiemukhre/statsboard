@@ -57,9 +57,9 @@ params:
   #   - title: Dropdown item
   #     url: /
   - title: Log in
-    url: dashbook-app.ml/signin
+    url: https://www.dashbook-app.ml/signin
   - title: Sign up
-    url: dashbook-app.ml/signup
+    url: https://www.dashbook-app.ml/signup
     button: true
   section1:
     title: Features
