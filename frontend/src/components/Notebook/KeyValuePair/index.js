@@ -99,23 +99,23 @@ onKeyChange(e) {
     window.location.reload();
   }
 
-//   getTableData=async() =>
-//   {
-//      const rooturl="localhost";
-//      //const res = await axios.get("http://" + rooturl + ":5000/Notebook");
-//      //console.log(res);
-//      const res = [{'id' : '1', 'key' : '7', 'value' : '8'}, {'id' : '2', 'key' : '1', 'value' : '2'}];
-//      return this.state.res.map((record, index) => {
-//          const {id, key, value} = record
-//          return (
-//              <tr key={id}>
-//                  <td>{id}</td>
-//                  <td>{key}</td>
-//                  <td>{value}</td>
-//              </tr>
-//          )
-//      })
-//   }
+  getTableData=async() =>
+  {
+    //  const rooturl="3.17.63.183";
+    //  const res = await axios.get("http://" + rooturl + ":5000/Notebook");
+    //  console.log(res);
+     const res = [{'id' : '1', 'key' : '7', 'value' : '8'}, {'id' : '2', 'key' : '1', 'value' : '2'}];
+     return this.state.res.map((record, index) => {
+         const {id, key, value} = record
+         return (
+             <tr key={id}>
+                 <td>{id}</td>
+                 <td>{key}</td>
+                 <td>{value}</td>
+             </tr>
+         )
+     })
+  }
 
 generateHeader(){
     let res=[];
@@ -205,7 +205,7 @@ generateTableData() {
 
     return(
 
-        <div  className="multitextfield">
+        <div  className="multitextfield" style={{marginTop: 60}}>
 
             <div>
             <TableContainer component={Paper}>

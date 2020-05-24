@@ -7,6 +7,7 @@ import Dashboard from "../../components/Dashboard";
 import Notebook from "../../components/Notebook/Notebook"
 import Layout from '../../components/Layout';
 import Account from '../../components/Account';
+import NotebookKeyValuePair from '../../components/Notebook/KeyValuePair';
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
 
               <Route path="/notebook">
                 <Layout>
-                  <Notebook/> 
+                  {/* <Notebook/> */}
+                  <NotebookKeyValuePair/>
                 </Layout>
               </Route>
 

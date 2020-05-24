@@ -10,9 +10,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
-import MediaCard from './MediaCard/MediaCard';
 import useDashboardData from './hooks';
+import MediaCard from './MediaCard'
 import Tabular from './Tabular/Tabular';
+import LineChart from './LineChart'
 
 export default function Dashboard(){
     const [open, setOpen] = React.useState(false);
@@ -56,12 +57,31 @@ export default function Dashboard(){
                 <Grid item xs={false} md={1} ></Grid>
                 <Grid item xs ={12} md={10}>
                     <Box display="flex" flexWrap="wrap" justifyContent="center">
-                        {datas.map((data, i) => (
-                            <Box key={i} p={1}>
-                                <MediaCard nbname={data.nbname} key={i}/>
-                                {/* <Tabular key={i}/> */}
-                            </Box>
-                        ))}
+                        {/* {datas.map((data, i) => {
+                            if (data.graphtype === 'Linear Graph'){
+                                return(
+                                    <Box key={i} p={1}>
+                                        <MediaCard nbname={data.nbname} key={i}/>
+                                    </Box>
+                                )
+                            } else if (data.graphtype === 'Tabular View'){
+                                return(
+                                    <Box key={i} p={1}>
+                                        <Tabular key ={i}/>
+                                    </Box> 
+                                )
+                            }
+                        })} */}
+                        <Box p={1}>
+                            <MediaCard>
+                                <LineChart/>
+                            </MediaCard>
+                        </Box> 
+                        <Box p={1}>
+                            <MediaCard>
+                                <Tabular/>
+                            </MediaCard>
+                        </Box> 
                     </Box>
                 </Grid>
                 <Grid item xs={false} md={1}></Grid>

@@ -157,7 +157,7 @@ export default function Layout(props) {
         <Divider />
         <List>
               {notebooks.map((notebook, index) => (
-                <ListItemLink key={index} href={`/${notebook.nbname}`} >
+                <ListItemLink key={index} href={`/notebook`} >
                   <ListItemIcon><LibraryBooksIcon/></ListItemIcon>
                   <ListItemText primary={notebook.nbname} />
                 </ListItemLink>

@@ -6,11 +6,11 @@ export default function LineChart(){
 
     function chart(){
         setChartData({
-            labels: ['monday', 'tuesday','wednesday','thursday','friday'],
+            labels: ["May 1", "May 2", "May 3", "May 4", "May 5", "May 6", "May 7"],
             datasets: [
                 {
-                    label: 'thickness',
-                    data: [32, 45, 12, 76, 69],
+                    label: 'stocks price ($)',
+                    data: ["183.6", "190.5", "193.66", "185.26", "190.29", "200.45", "210.65"],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.6)'
                     ],

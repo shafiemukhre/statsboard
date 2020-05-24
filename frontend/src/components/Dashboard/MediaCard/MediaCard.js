@@ -126,8 +126,6 @@ export default function MediaCard(props) {
                                 <MenuItem value={"Linear Graph"} style={{fontSize:'10px'}}>Linear Graph</MenuItem>
                                 <MenuItem value={"Bar Graph"} style={{fontSize:'10px'}}>Bar Graph</MenuItem>
                                 <MenuItem value={"Tabular View"} style={{fontSize:'10px'}}>Tabular View</MenuItem>
-                                <MenuItem value={"Histogram"} style={{fontSize:'10px'}}>Histogram</MenuItem>
-                                <MenuItem value={"Pie Chart"} style={{fontSize:'10px'}}>Pie Chart</MenuItem>
                               </Select>
                             </FormControl>
                           </Grid>
@@ -141,7 +139,7 @@ export default function MediaCard(props) {
             </Dialog>
         </table>
           <Divider/>
-          <Chartjs/>
+          {props.children}
         </Card>
     </div>
   );

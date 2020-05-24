@@ -162,10 +162,6 @@ def urltablepost(user_id,nb_id):
 				
 		return json.dumps(result)
 
-		
-
-
-
 if __name__ == "__main__":
     app.run()
 
