@@ -65,7 +65,7 @@ constructor(props){
 	
 	}
 	async componentDidMount() {
-		const response = await axios.get('http://3.17.63.183:5000/notebooklist/Notebook');
+		const response = await axios.get('http://localhost:5000/notebooklist/Notebook');
 		//const json = await response.json();
 		console.log(response.data);
 		this.setState({items:response.data});

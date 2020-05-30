@@ -10,7 +10,7 @@ app = Flask(__name__)
 # response.headers['Access-Control-Allow-Methods']= "GET,HEAD,OPTIONS,POST,PUT"
 # response.headers['Access-Control-Allow-Headers']= "Access-Control-Allow-Headers,Access-Control-Allow-Origin"
 
-app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
+app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 cors = CORS(app, resources={r"/": {"origins": "http://localhost:3000"}})
@@ -75,7 +75,7 @@ def notebookrequest(user_id,nb_id):
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def dashboard(user_id):
 	c.execute('select DISTINCT it.id,notebookname,graphtype,it.ylabel,it.user_id,it.nb_id from ' +
-			  'notebooktable nt INNER JOIN inputoutputtable it ON nt.id = it.nb_id where it.user_id = (?)', user_id)
+			  'notebooktable nt INNER JOIN inputoutputtable it ON nt.id = it.nb_id where it.user_id = (?)', [user_id])
 	data = c.fetchall()
 	json_dict = {}
 	result = []
@@ -92,9 +92,9 @@ def dashboard(user_id):
 @app.route('/<user_id>/notebooklist',methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def notebooklist(user_id):
-	c.execute('select DISTINCT notebookname from ' +
-			  'notebooktable nt INNER JOIN inputoutputtable it ON nt.id = it.nb_id where it.user_id = (?)', user_id)
+	c.execute('SELECT notebookname FROM notebooktable WHERE notebooktable.user_id = (?)', user_id)
 	data = c.fetchall()
+	print('data?')
 	json_dict = {}
 	result = []
 	keys = ['nbname']
@@ -102,8 +102,7 @@ def notebooklist(user_id):
 		for j in range(len(data[i])):
 			json_dict[keys[j]] = data[i][j]
 		result.append(json_dict)
-		json_dict = {}
-			
+		json_dict = {}	
 	return json.dumps(result)
 
 @app.route('/<user_id>/chartdata/<nb_id>', methods=['GET'])
