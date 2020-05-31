@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath flask-postgresql-backend app:app
