@@ -88,10 +88,16 @@ const AccountProfile = props => {
           className={classes.uploadButton}
           color="primary"
           variant="text"
+          disabled //TODO: remove disabled
         >
           Upload picture
         </Button>
-        <Button variant="text">Remove picture</Button>
+        <Button 
+        variant="text"
+        disabled //TODO: remove disabled
+        >
+          Remove picture
+        </Button>
       </CardActions>
     </Card>
   );

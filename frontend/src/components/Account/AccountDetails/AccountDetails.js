@@ -139,6 +139,7 @@ const AccountDetails = props => {
                 type="number"
                 value={values.phone}
                 variant="outlined"
+                disabled //TODO: remove disabled
               />
             </Grid>
             <Grid
@@ -183,6 +184,7 @@ const AccountDetails = props => {
                 required
                 value={values.country}
                 variant="outlined"
+                disabled //TODO: remove disabled
               />
             </Grid>
             <Grid
