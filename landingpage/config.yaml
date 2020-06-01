@@ -36,7 +36,7 @@ params:
     # Button text
     buttontext: Get started
     # Where the main hero button links to
-    buttonlink: "https://dashbookapp.onrender.com/signin"
+    buttonlink: "https://dashbook-app.ml/signin"
     # Hero image (from static/images/___)
     image: illustrations/undraw_data_trends.svg
     # Footer logos (from static/images/logos/clients/___.svg)

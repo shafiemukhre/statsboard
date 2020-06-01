@@ -16,7 +16,7 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 # cors = CORS(app)
 
 #switch Environment and database
-ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
@@ -149,4 +149,9 @@ def signin():
 
 #run app with gunicorn
 if __name__ == '__main__':
-    app.run()
+    if ENV == 'dev':
+        app.debug = True
+        app.run(debug=True)
+    elif ENV == 'prod':
+        app.run(debug=False)
+    
