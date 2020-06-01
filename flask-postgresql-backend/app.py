@@ -16,7 +16,7 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 # cors = CORS(app)
 
 #switch Environment and database
-ENV = 'dev'
+ENV = 'prod'
 
 if ENV == 'dev':
     app.debug = True
@@ -38,7 +38,7 @@ elif ENV == 'prod':
 cursor = conn.cursor()
 
 #defines all api routes
-@app.route('/api/test')
+@app.route('/')
 def index():
     cursor.execute('SELECT id, name FROM employees')
     rows = cursor.fetchall()
@@ -49,7 +49,7 @@ def index():
     conn.close()
 
 #manully create table by calling API
-@app.route('/')
+@app.route('/start')
 def createTable():
     cursor.execute(
         'CREATE TABLE IF NOT EXISTS keyvaluetable(' +
