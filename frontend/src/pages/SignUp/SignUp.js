@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom'
+
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,7 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { FormControl, MenuItem, Select, InputLabel} from '@material-ui/core'
-import { withRouter } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,6 +49,13 @@ function SignUp(props) {
   const [role, setRole] = useState('')
   const [language, setLanguage] = useState('')
 
+  const {t, i18n } = useTranslation()
+
+  function handleLanguage(e){
+    i18n.changeLanguage(e.target.value)
+    setLanguage(e.target.value)
+  }
+
   function handleSubmit(e){
     e.preventDefault()
 
@@ -77,7 +88,7 @@ function SignUp(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          {t('signup.signup')}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -89,7 +100,7 @@ function SignUp(props) {
                 required
                 fullWidth
                 id="username"
-                label="Username"
+                label={t('signup.username')}
                 autoFocus
                 value = {username}
                 onChange = {(e) => setUsername(e.target.value)}
@@ -101,7 +112,7 @@ function SignUp(props) {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label={t('signup.emailaddress')}
                 // name="email"
                 autoComplete="email"
                 value = {email}
@@ -114,7 +125,7 @@ function SignUp(props) {
                 required
                 fullWidth
                 // name="password"
-                label="Password"
+                label={t('signup.password')}
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -124,30 +135,30 @@ function SignUp(props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl required className={classes.formControl}>
-                <InputLabel id="select-role">Role</InputLabel>
+                <InputLabel id="select-role">{t('signup.role')}</InputLabel>
                 <Select
                   labelId="select-role"
                   id="role"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >
-                  <MenuItem value={'datascientist'}>Data Scientist</MenuItem>
-                  <MenuItem value={'manager'}>Manager</MenuItem>
+                  <MenuItem value={'analyst'}>{t('signup.analyst')}</MenuItem>
+                  <MenuItem value={'manager'}>{t('signup.manager')}</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl required className={classes.formControl}>
-                <InputLabel id="select-lang">Language</InputLabel>
+                <InputLabel id="select-lang">{t('signup.language')}</InputLabel>
                 <Select
                   labelId="select-lang"
                   id="lang"
                   value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
+                  onChange={handleLanguage}
                 >
-                  <MenuItem value={'english'}>English</MenuItem>
-                  <MenuItem value={'bahasa'}>Bahasa</MenuItem>
-                  <MenuItem value={'hindi'}>Hindi</MenuItem>
+                  <MenuItem value={'english'}>{t('signup.english')}</MenuItem>
+                  <MenuItem value={'bahasa'}>{t('signup.bahasa')}</MenuItem>
+                  <MenuItem value={'hindi'}>{t('signup.hindi')}</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -159,12 +170,12 @@ function SignUp(props) {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            {t('signup.signup')}
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/signin" variant="body2">
-                Already have an account? Sign in
+                {t('signup.already')}
               </Link>
             </Grid>
           </Grid>

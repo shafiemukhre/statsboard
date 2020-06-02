@@ -1,0 +1,16 @@
+{
+    "signup":{
+        "signup":"Pendaftaran",
+        "username":"Nama",
+        "emailaddress":"Emel",
+        "password":"Kata Laluan",
+        "role":"Jawatan",
+        "analyst":"Penganalisis",
+        "manager":"Pengurus",
+        "language":"Bahasa",
+        "english":"Bahasa Inggeris",
+        "bahasa":"Bahasa Melayu",
+        "hindi":"Bahasa Hindi",
+        "already":"Sudah mempunyai akaun? Log masuk"
+    }
+}

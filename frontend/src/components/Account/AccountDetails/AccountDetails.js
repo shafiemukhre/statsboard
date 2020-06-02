@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -12,6 +12,7 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
+import { userContext } from '../../../store';
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -21,13 +22,14 @@ const AccountDetails = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
+  const [username, setUsername] = useContext(userContext)
 
   const [values, setValues] = useState({
     userName: 'shafiemukhre',
-    email: 'shafiemukhre@gmail.com',
+    email: 'username@email.com',
     phone: '',
     state: 'Alabama',
-    country: 'USA'
+    country: 'Country'
   });
 
   const handleChange = event => {
@@ -43,8 +45,8 @@ const AccountDetails = props => {
       label: 'English'
     },
     {
-      value: 'malay',
-      label: 'Malay'
+      value: 'bahasa',
+      label: 'Bahasa'
     },
     {
       value: 'hindi',
@@ -54,16 +56,12 @@ const AccountDetails = props => {
 
   const access = [
     {
-      value: 'datasciencemanager',
-      label: 'Data Science Manager'
+      value: 'analyst',
+      label: 'Analyst'
     },
     {
-      value: 'datascientist',
-      label: 'Data Scientist'
-    },
-    {
-      value: 'employee',
-      label: 'Employee'
+      value: 'manager',
+      label: 'Manager'
     },
   ];
 
@@ -99,7 +97,7 @@ const AccountDetails = props => {
                 name="userName"
                 onChange={handleChange}
                 required
-                value={values.userName}
+                value={username}
                 variant="outlined"
               />
             </Grid>
@@ -123,6 +121,7 @@ const AccountDetails = props => {
                 required
                 value={values.email}
                 variant="outlined"
+                disabled //TODO: enable
               />
             </Grid>
             <Grid
@@ -194,7 +193,7 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Select Account Access"
+                label="Your Account Access"
                 margin="dense"
                 name="state"
                 onChange={handleChange}
@@ -204,6 +203,7 @@ const AccountDetails = props => {
                 SelectProps={{ native: true }}
                 value={values.state}
                 variant="outlined"
+                disabled
               >
                 {access.map(option => (
                   <option
@@ -222,6 +222,7 @@ const AccountDetails = props => {
           <Button
             color="primary"
             variant="contained"
+            disabled //TODO: enable
           >
             Save details
           </Button>

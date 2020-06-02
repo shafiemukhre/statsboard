@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import Box from '@material-ui/core/Box';
 import Drawer from '@material-ui/core/Drawer';
@@ -25,27 +26,32 @@ import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+
 
 import useStyles from './style'
 import useData from './hooks'
+import { userContext, loginContext } from '../../store';
 // import temmporaryimage from './temporary.jpg'
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
+//COMPONENT
 export default function Layout(props) {
   const {children} = props;
   const [value, setValue] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openProfile = Boolean(anchorEl);
+  const [username, setUsername] = useContext(userContext)
+  const [, setIsLoggedIn] = useContext(loginContext)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const [open, setOpen] = React.useState(false);
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -59,13 +65,20 @@ export default function Layout(props) {
     setAnchorEl(event.currentTarget);
   };
 
-
+  //using hooks useHistory from react-router-dom
   const history = useHistory()
   const handleClose = () => {
     setAnchorEl(null);
     history.push("/account")
 
   };
+
+  const handleSignOut = () => {
+    setIsLoggedIn(false)
+    Cookies.remove('username')
+    setUsername('')
+    history.push('/signin')
+  }
 
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -93,7 +106,10 @@ export default function Layout(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Dashbook Project 1
+            {username}
+          </Typography>
+          <Typography variant="h6" noWrap>
+            's Dashbook
           </Typography>
           <div>
             <IconButton
@@ -103,7 +119,7 @@ export default function Layout(props) {
               onClick={handleMenu}
               color="inherit"
             >
-              <Avatar alt="Shafie Mukhre" src='/images/temporary.jpg'/>
+              <Avatar alt={username} src='/images/avatar.png'/>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -121,7 +137,7 @@ export default function Layout(props) {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
-              {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+              <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
             </Menu>
           </div>
         </Toolbar>

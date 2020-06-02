@@ -1,0 +1,16 @@
+{
+    "signup":{
+        "signup":"Sign Up",
+        "username":"Username",
+        "emailaddress":"Email Address",
+        "password":"Password",
+        "role":"Role",
+        "analyst":"Analyst",
+        "manager":"Manager",
+        "language":"Language",
+        "english":"English",
+        "bahasa":"Bahasa",
+        "hindi":"Hindi",
+        "already":"Already have an account? Sign in"
+    }
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -13,6 +13,7 @@ import {
   Button,
   LinearProgress
 } from '@material-ui/core';
+import { userContext } from '../../../store';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     marginLeft: 'auto',
-    height: 110,
+    height: 100,
     width: 100,
     flexShrink: 0,
     flexGrow: 0
@@ -38,14 +39,10 @@ const AccountProfile = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
+  const [username, setUsername] = useContext(userContext)
 
-  const user = {
-    name: 'Shen Zhi',
-    city: 'San Jose',
-    country: 'USA',
-    timezone: 'GTM-7',
-    avatar: '/images/temporary.jpg'
-  };
+
+  const avatar = '/images/avatar.png'
 
   return (
     <Card
@@ -59,19 +56,12 @@ const AccountProfile = props => {
               gutterBottom
               variant="h2"
             >
-              Shafie
-            </Typography>
-            <Typography
-              className={classes.locationText}
-              color="textSecondary"
-              variant="body1"
-            >
-              {user.city}, {user.country}
+              {username}
             </Typography>
           </div>
           <Avatar
             className={classes.avatar}
-            src={user.avatar}
+            src={avatar}
           />
         </div>
         {/* <div className={classes.progress}>

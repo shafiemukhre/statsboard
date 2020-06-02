@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, session
 import psycopg2
 from flask_cors import CORS
 
@@ -127,17 +127,17 @@ def signin():
     name = req['un']
     pw = req['pw']
 
-    # must include to specify the query variablee as tuple
+    # must include "," to specify the query variable as tuple
     cursor.execute(
-        'SELECT username, password, language, role FROM userprofile WHERE username=(%s) LIMIT 1', (name,))
+        'SELECT user_id, username, password, language, role FROM userprofile WHERE username=(%s) LIMIT 1', (name,))
     data = cursor.fetchall()
     # TODO: encrypt the password
     userData = data[0]
-    if (data and userData[1] == pw):
+    if (data and userData[2] == pw):
         json_dict = {
-            'username': userData[0],
-            'language': userData[2],
-            'role': userData[3]
+            'username': userData[1],
+            'language': userData[3],
+            'role': userData[4]
         }
         print(json_dict)
         return json_dict

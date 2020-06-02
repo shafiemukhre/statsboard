@@ -1,4 +1,8 @@
 import React, { useState, useContext } from 'react';
+import { userContext, languageContext, roleContext, loginContext } from '../../store';
+import Cookies from 'js-cookie'
+import { withRouter } from 'react-router-dom'
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
-import { userContext, languageContext, roleContext } from '../../store';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,6 +46,7 @@ function SignIn(props) {
   const [password, setPassword] = useState('')
   const [language, setLanguage] = useContext(languageContext)
   const [, setRole] = useContext(roleContext)
+  const [, setIsLoggedIn] = useContext(loginContext)
 
   function handleSubmit(e){
     e.preventDefault()
@@ -67,8 +71,10 @@ function SignIn(props) {
         setUsername(data.username)
         setRole(data.role)
         setLanguage(data.language)
+        setIsLoggedIn(true)
         props.history.push('/dashboard')
-      } else if (data.error){
+        Cookies.set('username', username)
+      } else {
         alert(data.error)
         //using high-order-component withRouter in order to pass props.history
         props.history.push('/signin')
@@ -151,4 +157,4 @@ function SignIn(props) {
   );
 }
 
-export default SignIn
+export default withRouter(SignIn)
