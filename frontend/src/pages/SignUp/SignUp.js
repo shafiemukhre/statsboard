@@ -61,7 +61,7 @@ function SignUp(props) {
 
     const localhost = 'https://dashbook.herokuapp.com'
     const endpoint = '/api/signup'
-    const url = `${localhost}:5000${endpoint}`
+    const url = `${localhost}${endpoint}`
     const requestOptions = {
         method: 'POST',
         headers: {

@@ -5,7 +5,7 @@ export default function useData(){
     useEffect(() => {
         const localhost = 'https://dashbook.herokuapp.com'
         const endpoint = '/rutuja/notebooklist'
-        const url = `${localhost}:5000${endpoint}`
+        const url = `${localhost}${endpoint}`
         fetch(url)
         .then(response => response.json())
         .then(data => setData(data))
