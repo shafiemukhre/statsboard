@@ -5,7 +5,7 @@ export default function useDashboardData(){
     const [dashboardData, setDashboardData] = useState([])
 
     useEffect(() => {
-        const localhost = 'http://localhost'
+        const localhost = 'https://dashbook.herokuapp.com'
         const endpoint = '/rutuja/dashboard'
         const url = `${localhost}:5000${endpoint}`
         fetch(url)

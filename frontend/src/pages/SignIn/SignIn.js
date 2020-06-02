@@ -51,7 +51,7 @@ function SignIn(props) {
   function handleSubmit(e){
     e.preventDefault()
 
-    const localhost = 'http://localhost'
+    const localhost = 'https://dashbook.herokuapp.com'
     const endpoint = '/api/signin'
     const url = `${localhost}:5000${endpoint}`
     const requestOptions = {
