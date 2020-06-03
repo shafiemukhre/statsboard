@@ -17,7 +17,7 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 # cors = CORS(app)
 
 #switch Environment and database
-ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
