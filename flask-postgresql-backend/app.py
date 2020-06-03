@@ -1,4 +1,5 @@
 from flask import Flask, request, session
+import json
 import psycopg2
 from flask_cors import CORS
 
@@ -40,6 +41,9 @@ cursor = conn.cursor()
 #defines all api routes
 @app.route('/')
 def index():
+    """
+    To quickly test server is working
+    """
     cursor.execute('SELECT id, name FROM employees')
     rows = cursor.fetchall()
     for r in rows:
@@ -48,9 +52,11 @@ def index():
     cursor.close()
     conn.close()
 
-#manully create table by calling API
 @app.route('/start')
 def createTable():
+    """
+    To manually create table by calling the API
+    """
     cursor.execute(
         'CREATE TABLE IF NOT EXISTS keyvaluetable(' +
             'id SERIAL NOT NULL,' + 
@@ -89,8 +95,8 @@ def createTable():
     cursor.execute(
         'CREATE TABLE IF NOT EXISTS userprofile(' +
             'user_id SERIAL UNIQUE NOT NULL,' + 
-            'username varchar(64) NOT NULL,' + 
-            'email varchar(64) NOT NULL,' + 
+            'username varchar(64) UNIQUE NOT NULL,' + 
+            'email varchar(64) UNIQUE NOT NULL,' + 
             'password varchar(64) NOT NULL,' + 
             'language varchar(16),' + 
             'role varchar(16),'
@@ -105,6 +111,9 @@ def createTable():
 
 @app.route('/api/signup', methods=['POST'])
 def signup():
+    """
+    To insert users data into database for signup registration
+    """
     req = request.json
     name = req['un']
     email = req['em']
@@ -123,6 +132,11 @@ def signup():
 
 @app.route('/api/signin', methods=['POST'])
 def signin():
+    """
+    To check if username is available in the database
+    -> if yes, check if the password is correct
+    -> if yes, return username, language, role to be used as cookie session
+    """
     req = request.json
     name = req['un']
     pw = req['pw']
@@ -139,13 +153,36 @@ def signin():
             'language': userData[3],
             'role': userData[4]
         }
-        print(json_dict)
         return json_dict
     else:
         return {'error': 'incorrect username and password'}
     # conn.commit() #read operation doesnt need commit
     # cursor.close()
     # conn.close()
+
+
+@app.route('/api/users', methods=['GET'])
+def users():
+    """
+    To return all users' name, email and role
+    """
+    cursor.execute(
+        'SELECT username, email, role FROM userprofile'
+    )
+    data = cursor.fetchall()
+    result = []
+    for i in range(len(data)):
+        json_item = {
+            'username': data[i][0],
+            'email': data[i][1],
+            'role': data[i][2],
+        }
+        result.append(json_item)
+    json_dict = {
+        'users': result,
+    }
+    return json_dict
+
 
 #run app with gunicorn
 if __name__ == '__main__':

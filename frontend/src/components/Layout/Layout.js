@@ -21,6 +21,7 @@ import Menu from '@material-ui/core/Menu';
 import Avatar from '@material-ui/core/Avatar';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import PeopleIcon from '@material-ui/icons/People';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -30,7 +31,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import useStyles from './style'
 import useData from './hooks'
-import { userContext, loginContext } from '../../store';
+import { userContext, loginContext, roleContext, languageContext } from '../../store';
 // import temmporaryimage from './temporary.jpg'
 
 function ListItemLink(props) {
@@ -45,6 +46,8 @@ export default function Layout(props) {
   const openProfile = Boolean(anchorEl);
   const [username, setUsername] = useContext(userContext)
   const [, setIsLoggedIn] = useContext(loginContext)
+  const [role, setRole] = useContext(roleContext)
+  const [language, setLanguage] = useContext(languageContext)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -76,13 +79,18 @@ export default function Layout(props) {
   const handleSignOut = () => {
     setIsLoggedIn(false)
     Cookies.remove('username')
+    Cookies.remove('role')
+    Cookies.remove('language')
+    Cookies.remove('isLoggedIn')
     setUsername('')
+    setRole('')
+    setLanguage('')
     history.push('/signin')
   }
 
   const theme = useTheme();
   const classes = useStyles(theme);
-  const notebooks = useData()
+  // const notebooks = useData()
 
   return (
     <div className={classes.root}>
@@ -93,7 +101,7 @@ export default function Layout(props) {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -105,13 +113,12 @@ export default function Layout(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            {username}
-          </Typography>
-          <Typography variant="h6" noWrap>
-            's Dashbook
-          </Typography>
-          <div>
+          { role === 'analyst' ? 
+          <Typography variant="h6" noWrap> {username + '\'s Dashbook'} </Typography> :
+          "" }
+          {/* TODO: display users' dashbook */}
+        </Toolbar>
+        <div>
             <IconButton
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -140,9 +147,7 @@ export default function Layout(props) {
               <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
             </Menu>
           </div>
-        </Toolbar>
       </AppBar>
-
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -156,12 +161,13 @@ export default function Layout(props) {
           }),
         }}
       >
-        <div className={classes.toolbar}>
+        <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
         <Divider />
+        { role === 'analyst' ? 
         <List>
             {['Dashboard'].map((text, index) => (
               <ListItemLink href="/dashboard" key="index">
@@ -170,8 +176,19 @@ export default function Layout(props) {
               </ListItemLink>
             ))}
         </List>
-        <Divider />
+        :
         <List>
+            {['Users'].map((text, index) => (
+              <ListItemLink href="/users" key="index">
+                <ListItemIcon><PeopleIcon /></ListItemIcon>
+                <ListItemText primary={text} /> 
+              </ListItemLink>
+            ))}
+        </List>
+      }
+        <Divider />
+        {/* TODO: add notebook feature in the future */}
+        {/* <List>
               {notebooks.map((notebook, index) => (
                 <ListItemLink key={index} href={`/notebook`} >
                   <ListItemIcon><LibraryBooksIcon/></ListItemIcon>
@@ -189,7 +206,7 @@ export default function Layout(props) {
               <ListItemText primary="Add New Notebook"/>
             </ListItem>
           </List>
-        </Box>
+        </Box> */}
       </Drawer>
       <main className={classes.content}>
         {children}

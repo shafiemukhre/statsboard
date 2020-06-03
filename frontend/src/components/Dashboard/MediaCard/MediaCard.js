@@ -13,8 +13,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Grid from '@material-ui/core/Grid';
 import styles from './style.module.css'
-import {setCount} from '../../../reducers/count/actions';
-import stores from '../../../stores';
 import Chartjs from '../LineChart/LineChart';
 
 const useStyles = makeStyles(()=>({
@@ -46,7 +44,7 @@ export default function MediaCard(props) {
     const values = [...fields];
     values.push({ value: null });
     setFields(values);
-    stores.dispatch(setCount(values.length));
+    // stores.dispatch(setCount(values.length));
     // demo();
   }
 

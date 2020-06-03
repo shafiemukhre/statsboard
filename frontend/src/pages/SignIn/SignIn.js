@@ -45,13 +45,13 @@ function SignIn(props) {
   const [username, setUsername] = useContext(userContext)
   const [password, setPassword] = useState('')
   const [language, setLanguage] = useContext(languageContext)
-  const [, setRole] = useContext(roleContext)
-  const [, setIsLoggedIn] = useContext(loginContext)
+  const [role, setRole] = useContext(roleContext)
+  const [isLoggedIn, setIsLoggedIn] = useContext(loginContext)
 
   function handleSubmit(e){
     e.preventDefault()
 
-    const localhost = 'https://dashbook.herokuapp.com'
+    const localhost = 'http://127.0.0.1:5000'
     const endpoint = '/api/signin'
     const url = `${localhost}${endpoint}`
     const requestOptions = {
@@ -72,8 +72,15 @@ function SignIn(props) {
         setRole(data.role)
         setLanguage(data.language)
         setIsLoggedIn(true)
-        props.history.push('/dashboard')
-        Cookies.set('username', username)
+        Cookies.set('isLoggedIn', true)
+        Cookies.set('username', data.username)
+        Cookies.set('role',data.role)
+        Cookies.set('language', data.language)
+        if (data.role === 'analyst'){
+          props.history.push('/dashboard')
+        } else if (data.role === 'manager'){
+          props.history.push('/users')
+        }
       } else {
         alert(data.error)
         //using high-order-component withRouter in order to pass props.history
@@ -103,7 +110,7 @@ function SignIn(props) {
             fullWidth
             id="username"
             label="Username"
-            autoFocus
+            // autoFocus
             value = {username}
             onChange = {(e) => setUsername(e.target.value)}
           />
@@ -152,6 +159,10 @@ function SignIn(props) {
             </Grid>
           </Grid>
         </form>
+        {/* <Typography variant="subtitle2" >Manager login</Typography>
+        <Typography variant="caption" >username: manager, password: password</Typography>
+        <Typography variant="subtitle2" >Analyst login</Typography>
+        <Typography variant="caption" >username: user, password: pass</Typography> */}
       </div>
     </Container>
   );

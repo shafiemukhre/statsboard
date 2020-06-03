@@ -5,7 +5,6 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
-      flexGrow: 1,
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -13,6 +12,8 @@ const useStyles = makeStyles((theme) => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      justifyContent: "space-between",
+      flexDirection: "row",
     },
     appBarShift: {
       marginLeft: drawerWidth,
@@ -53,12 +54,16 @@ const useStyles = makeStyles((theme) => ({
       },
   
     },
-    toolbar: {
+    profileIcon: {
+      // display: "flex",
+      // alignSelf: "flex-end",
+    },
+    toolbarIcon: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
       padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
+      // // necessary for content to be below app bar
       ...theme.mixins.toolbar,
     },
     content: {
@@ -70,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     },
     profileposition: {
       // alignSelf: 'flex-end'
-    }
+    },
 }));
 
 export default useStyles
