@@ -121,7 +121,6 @@ const UsersTable = props => {
               </TableHead>
               <TableBody>
                 {users && users.slice(0, rowsPerPage).map((user, i) => {
-                  debugger;
                   return(
                     <TableRow
                     className={classes.tableRow}

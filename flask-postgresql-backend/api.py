@@ -119,7 +119,7 @@ def signin():
 
     # must include "," to specify the query variable as tuple
     cursor.execute(
-        'SELECT user_id, username, password, language, role FROM userprofile' + 
+        'SELECT user_id, username, password, language, role FROM userprofile ' + 
         'WHERE username=(%s) LIMIT 1', (name,))
     data = cursor.fetchall()
     # TODO: encrypt the password
