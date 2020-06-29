@@ -1,4 +1,4 @@
-baseURL: https://dashbook.ml/
+baseURL: https://statsboard.ml/
 languageCode: en-us
 title: Dashbook.ml Predictive Analysis | Dashboard ML for Centralized Predictive Analytics
 theme: hugo-fresh
@@ -20,23 +20,23 @@ params:
   # Open graph allows easy social sharing. If you don't want it you can set it to false or just delete the variable
   openGraph: true
   # Used as meta data; describe your site to make Google Bots happy 
-  description: Dashbook is SaaS platform to centralized Prediction Analysis in one dashboard
+  description: Statsboard is SaaS platform to centralized Prediction Analysis in one dashboard
   navbarlogo:
   # Logo (from static/images/logos/___)
-    image: logos/dashbooklogov1.png
+    image: logos/statsboardlogov1.png
     link: /
   font:
     name: "Open Sans"
     sizes: [400,600]
   hero:
     # Main hero title
-    title: Dashboard + Notebook
+    title: Dashboard for Stats
     # Hero subtitle (optional)
-    subtitle: Analytics dashboard for machine learning model
+    subtitle: Analytics dashboard for statistic
     # Button text
     buttontext: Get started
     # Where the main hero button links to
-    buttonlink: "https://dashbook-app.ml/signin"
+    buttonlink: "https://statsboard.netlify.app/signin"
     # Hero image (from static/images/___)
     image: illustrations/undraw_data_trends.svg
     # Footer logos (from static/images/logos/clients/___.svg)
@@ -57,9 +57,9 @@ params:
   #   - title: Dropdown item
   #     url: /
   - title: Log in
-    url: https://www.dashbook-app.ml/signin
+    url: https://statsboard.neltify.app/signin
   - title: Sign up
-    url: https://www.dashbook-app.ml/signup
+    url: https://statsboard.neltify.app/signup
     button: true
   section1:
     title: Features
@@ -96,10 +96,10 @@ params:
   #     icon: mobile-feed
   section3:
     title: Centralized dashboard
-    subtitle: for all machine learning prediction
+    subtitle: for all statistic and analysis visualization
     image: illustrations/mockups/dashboard.png
     buttonText: Get started
-    buttonLink: "https://dashbookapp.onrender.com/signin"
+    buttonLink: "https://statsboard.netlify.app/signin"
   # section4: 
   #   title: Our Clients love us!
   #   subtitle: Lorem ipsum sit dolor amet is a dummy text used by typography industry
@@ -119,7 +119,7 @@ params:
   section5: false
   footer:
     # Logo (from /images/logos/___)
-    logo: dashbooklogov1.png
+    logo: statsboardlogov1.png
     # Social Media Title
     # socialmediatitle: Follow Us
     # Social media links (GitHub, Twitter, etc.). All are optional.
