@@ -11,6 +11,50 @@
         "english":"English",
         "bahasa":"Bahasa",
         "hindi":"Hindi",
-        "already":"Already have an account? Sign in"
+        "already":"Already have an account? Sign in",
+        "required":"Required"
+    },
+    "signin": {
+        "signin":"Sign In",
+        "username":"Username",
+        "password":"Password",
+        "language":"Language",
+        "dont":"Don't have an account? Sign Up",
+        "english":"English",
+        "bahasa":"Bahasa",
+        "hindi":"Hindi",
+        "optional":"Optional"
+    },
+    "layout":{
+        "dashboard":"Dashboard",
+        "profile":"Profile",
+        "signout":"Sign Out",
+        "users":"Users"
+    },
+    "profile":{
+        "upload":"Upload Picture",
+        "remove":"Remove Picture",
+        "profile":"Profile",
+        "information":"The information can be edited",
+        "username":"Username",
+        "specify":"Please specify the username",
+        "email":"Email Address",
+        "phone":"Phone Number",
+        "language":"Select Language",
+        "english":"English",
+        "bahasa":"Bahasa",
+        "hindi":"Hindi",
+        "country":"Country",
+        "access":"Your Account Access",
+        "analyst":"Analyst",
+        "manager":"Manager",
+        "save":"Save Details"
+    },
+    "users":{
+        "save":"Save",
+        "name":"Name",
+        "email":"Email",
+        "role":"Role",
+        "rows":"Rows per page"
     }
 }

@@ -159,3 +159,12 @@ def users():
         'users': result,
     }
     return json_dict
+
+@app.route('/api/<username>/profile', method=['GET'])
+def profile():
+    """
+    To return a details for one user
+    """
+    cursor.execute(
+        'SELECT '
+    )

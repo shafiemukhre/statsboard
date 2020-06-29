@@ -11,6 +11,50 @@
         "english":"Bahasa Inggeris",
         "bahasa":"Bahasa Melayu",
         "hindi":"Bahasa Hindi",
-        "already":"Sudah mempunyai akaun? Log masuk"
+        "already":"Sudah mempunyai akaun? Log masuk",
+        "required":"Wajib"
+    },
+    "signin": {
+        "signin":"Log Masuk",
+        "username":"Nama",
+        "password":"Kata Laluan",
+        "dont":"Tidak mempunyai akaun? Daftar",
+        "language":"Bahasa",
+        "english":"Bahasa Inggeris",
+        "bahasa":"Bahasa Melayu",
+        "hindi":"Bahasa Hindi",
+        "optional":"Tidak Diwajibkan"
+    },
+    "layout":{
+        "dashboard":"Dashboard",
+        "profile":"Profil",
+        "signout":"Log Keluar",
+        "users":"Pengguna"
+    },
+    "profile":{
+        "upload":"Muat Naik Gambar",
+        "remove":"Keluarkan Gambar",
+        "profile":"Profil",
+        "information":"Maklumat ini boleh diedit",
+        "username":"Nama",
+        "specify":"Sila nyatakan nama pengguna",
+        "email":"Emel",
+        "phone":"Nombor Telefon",
+        "language":"Pilih Bahasa",
+        "english":"Bahasa Inggeris",
+        "bahasa":"Bahasa Melayu",
+        "hindi":"Bahasa Hindi",
+        "country":"Negara",
+        "access":"Akses Akaun Anda",
+        "analyst":"Penganalisis",
+        "manager":"Pengurus",
+        "save":"Simpan Maklumat Anda"
+    },
+    "users":{
+        "save":"Simpan",
+        "name":"Nama",
+        "email":"Emel",
+        "role":"Jawatan",
+        "rows":"Bilangan baris setiap halaman"
     }
 }

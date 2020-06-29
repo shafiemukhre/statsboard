@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 
 
 import Avatar from '@material-ui/core/Avatar';
@@ -12,8 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { FormControl, MenuItem, Select, InputLabel} from '@material-ui/core'
-import { useTranslation } from 'react-i18next';
+import { FormControl, MenuItem, Select, InputLabel, FormHelperText} from '@material-ui/core'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SignUp(props) {
   const classes = useStyles();
+  const {t, i18n } = useTranslation()
 
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -49,17 +50,16 @@ function SignUp(props) {
   const [role, setRole] = useState('')
   const [language, setLanguage] = useState('')
 
-  const {t, i18n } = useTranslation()
 
   function handleLanguage(e){
     i18n.changeLanguage(e.target.value)
-    setLanguage(e.target.value)
+    // setLanguage(e.target.value)
   }
 
   function handleSubmit(e){
     e.preventDefault()
 
-    const localhost = 'https://dashbook.herokuapp.com'
+    const localhost = 'http://127.0.0.1:5000'
     const endpoint = '/api/signup'
     const url = `${localhost}${endpoint}`
     const requestOptions = {
@@ -145,6 +145,7 @@ function SignUp(props) {
                   <MenuItem value={'analyst'}>{t('signup.analyst')}</MenuItem>
                   <MenuItem value={'manager'}>{t('signup.manager')}</MenuItem>
                 </Select>
+                <FormHelperText>{t('signup.required')}</FormHelperText>
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -153,13 +154,14 @@ function SignUp(props) {
                 <Select
                   labelId="select-lang"
                   id="lang"
-                  value={language}
+                  // value={language}
                   onChange={handleLanguage}
                 >
                   <MenuItem value={'english'}>{t('signup.english')}</MenuItem>
                   <MenuItem value={'bahasa'}>{t('signup.bahasa')}</MenuItem>
                   <MenuItem value={'hindi'}>{t('signup.hindi')}</MenuItem>
                 </Select>
+                <FormHelperText>{t('signup.required')}</FormHelperText>
               </FormControl>
             </Grid>
           </Grid>

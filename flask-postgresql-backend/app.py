@@ -6,7 +6,7 @@ import os #to use environment variables in .env and .flaskenv
 app = Flask(__name__)
 
 #switch database server
-DB = 'prod'
+DB = 'dev'
 if DB == 'dev':
     app.debug = True
     conn = psycopg2.connect(

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { userContext, languageContext, roleContext, loginContext } from '../../store';
 import Cookies from 'js-cookie'
 import { withRouter } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,7 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
+import {FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,17 +42,27 @@ const useStyles = makeStyles((theme) => ({
 
 //COMPONENT
 function SignIn(props) {
+  //styles
   const classes = useStyles();
+
+  //localization
+  const [t, i18n] = useTranslation()
+  function handleLanguage(e){
+    i18n.changeLanguage(e.target.value)
+    // setLanguage(e.target.value)
+  }
+
+  //global states
   const [username, setUsername] = useContext(userContext)
   const [password, setPassword] = useState('')
   const [language, setLanguage] = useContext(languageContext)
   const [role, setRole] = useContext(roleContext)
   const [isLoggedIn, setIsLoggedIn] = useContext(loginContext)
 
+  //to signin into database
   function handleSubmit(e){
     e.preventDefault()
-
-    const localhost = 'https://dashbook.herokuapp.com'
+    const localhost = 'http://127.0.0.1:5000'
     const endpoint = '/api/signin'
     const url = `${localhost}${endpoint}`
     const requestOptions = {
@@ -99,7 +110,7 @@ function SignIn(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {t('signin.signin')}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
@@ -109,7 +120,7 @@ function SignIn(props) {
             required
             fullWidth
             id="username"
-            label="Username"
+            label={t('signin.username')}
             // autoFocus
             value = {username}
             onChange = {(e) => setUsername(e.target.value)}
@@ -120,7 +131,7 @@ function SignIn(props) {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={t('signin.password')}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -128,18 +139,19 @@ function SignIn(props) {
             onChange = {e => {setPassword(e.target.value)}}
           />
           <Grid item xs={12} sm={6}>
-            <FormControl required className={classes.formControl}>
-              <InputLabel id="select-lang">Language</InputLabel>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="select-lang">{t('signin.language')}</InputLabel>
               <Select
                 labelId="select-lang"
                 id="lang"
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
+                // value={language}
+                onChange={handleLanguage}
               >
-                <MenuItem value={'english'}>English</MenuItem>
-                <MenuItem value={'bahasa'}>Bahasa</MenuItem>
-                <MenuItem value={'hindi'}>Hindi</MenuItem>
+                <MenuItem value={'english'}>{t('signin.english')}</MenuItem>
+                <MenuItem value={'bahasa'}>{t('signin.bahasa')}</MenuItem>
+                <MenuItem value={'hindi'}>{t('signin.hindi')}</MenuItem>
               </Select>
+              <FormHelperText>{t('signin.optional')}</FormHelperText>
             </FormControl>
           </Grid>
           <Button
@@ -149,12 +161,12 @@ function SignIn(props) {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            {t('signin.signin')}
           </Button>
           <Grid container>
             <Grid item>
               <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {t('signin.dont')}
               </Link>
             </Grid>
           </Grid>

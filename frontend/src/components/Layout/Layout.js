@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import { useTranslation } from 'react-i18next';
 
-import Box from '@material-ui/core/Box';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -22,8 +22,6 @@ import Avatar from '@material-ui/core/Avatar';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -40,14 +38,26 @@ function ListItemLink(props) {
 
 //COMPONENT
 export default function Layout(props) {
+  //props
   const {children} = props;
+
+  //state
   const [value, setValue] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openProfile = Boolean(anchorEl);
+
+  //global state or context
   const [username, setUsername] = useContext(userContext)
   const [, setIsLoggedIn] = useContext(loginContext)
   const [role, setRole] = useContext(roleContext)
   const [language, setLanguage] = useContext(languageContext)
+
+  //localization
+  const [t, i18n] = useTranslation()
+  function handleLanguage(e){
+    i18n.changeLanguage(e.target.value)
+    // setLanguage(e.target.value)
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -143,8 +153,8 @@ export default function Layout(props) {
               open={openProfile}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+              <MenuItem onClick={handleClose}>{t('layout.profile')}</MenuItem>
+              <MenuItem onClick={handleSignOut}>{t('layout.signout')}</MenuItem>
             </Menu>
           </div>
       </AppBar>
@@ -167,7 +177,7 @@ export default function Layout(props) {
           </IconButton>
         </div>
         <Divider />
-        { role === 'analyst' ? 
+        { role === 'analyst' || 'िश्लेषक' || 'Penganalisis'  ? 
         <List>
             {['Dashboard'].map((text, index) => (
               <ListItemLink href="/dashboard" key="index">

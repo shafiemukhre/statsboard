@@ -9,7 +9,7 @@ export default function useUsers(){
         let controller = new AbortController()
 
         function fetchData(){
-            const localhost = 'https://dashbook.herokuapp.com'
+            const localhost = 'http://127.0.0.1:5000'
             const endpoint = '/api/users'
             const url = `${localhost}${endpoint}`
             const requestOptions = {

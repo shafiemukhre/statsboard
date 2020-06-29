@@ -12,17 +12,29 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
-import { userContext } from '../../../store';
+import { userContext, languageContext } from '../../../store';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
 const AccountDetails = props => {
+  //props
   const { className, ...rest } = props;
-
+  
+  //styles
   const classes = useStyles();
+
+  //context
   const [username, setUsername] = useContext(userContext)
+  const [language, setLanguage] = useContext(languageContext)
+  
+  //localization
+  const [t, i18n] = useTranslation()
+  function handleLanguage(e){
+    i18n.changeLanguage(e.target.value)
+  }
 
   const [values, setValues] = useState({
     userName: 'shafiemukhre',
@@ -75,8 +87,8 @@ const AccountDetails = props => {
         noValidate
       >
         <CardHeader
-          subheader="The information can be edited"
-          title="Profile"
+          subheader={t('profile.information')}
+          title={t('profile.profile')}
         />
         <Divider />
         <CardContent>
@@ -91,13 +103,13 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                helperText="Please specify the username"
-                label="User name"
+                helperText={t('profile.specify')}
+                label={t('profile.username')}
                 margin="dense"
                 name="userName"
                 onChange={handleChange}
                 required
-                value={username}
+                // value={username}
                 variant="outlined"
               />
             </Grid>
@@ -114,7 +126,7 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Email Address"
+                label={t('profile.email')}
                 margin="dense"
                 name="email"
                 onChange={handleChange}
@@ -131,7 +143,7 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Phone Number"
+                label={t('profile.phone')}
                 margin="dense"
                 name="phone"
                 onChange={handleChange}
@@ -148,25 +160,20 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Select Language"
+                label={t('profile.language')}
                 margin="dense"
                 name="state"
-                onChange={handleChange}
+                onChange={handleLanguage}
                 required
                 select
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
-                value={values.state}
+                value={language}
                 variant="outlined"
               >
-                {states.map(option => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
+                <option value={'english'}>{t('profile.english')}</option>
+                <option value={'bahasa'}>{t('profile.bahasa')}</option>
+                <option value={'hindi'}>{t('profile.hindi')}</option>
               </TextField>
             </Grid>
             <Grid
@@ -176,7 +183,7 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Country"
+                label={t('profle.country')}
                 margin="dense"
                 name="country"
                 onChange={handleChange}
@@ -193,7 +200,7 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Your Account Access"
+                label={t('profile.access')}
                 margin="dense"
                 name="state"
                 onChange={handleChange}
@@ -201,18 +208,12 @@ const AccountDetails = props => {
                 select
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
-                value={values.state}
+                // value={role}
                 variant="outlined"
                 disabled
               >
-                {access.map(option => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
+                <option value={'analyst'}>{t('profile.analyst')}</option>
+                <option value={'manager'}>{t('profile.manager')}</option>
               </TextField>
             </Grid>
           </Grid>
