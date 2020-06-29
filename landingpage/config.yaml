@@ -1,6 +1,6 @@
 baseURL: https://statsboard.ml/
 languageCode: en-us
-title: Dashbook.ml Predictive Analysis | Dashboard ML for Centralized Predictive Analytics
+title: Statsboard | Dashboard for Stats
 theme: hugo-fresh
 googleAnalytics: # Put in your tracking code without quotes like this: UA-XXXXXX...
 # Disables warnings
@@ -57,9 +57,9 @@ params:
   #   - title: Dropdown item
   #     url: /
   - title: Log in
-    url: https://statsboard.neltify.app/signin
+    url: https://statsboard.netlify.app/signin
   - title: Sign up
-    url: https://statsboard.neltify.app/signup
+    url: https://statsboard.netlify.app/signup
     button: true
   section1:
     title: Features
