@@ -11,8 +11,8 @@ gunicorn = "*"
 flask-cors = "*"
 flask-login = "*"
 python-dotenv = "*"
-psycopg2 = "*"
 psycopg2-binary = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.7"
